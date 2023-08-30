@@ -1,0 +1,111 @@
+import clientes.*
+import remiseras.*
+
+describe "Testing de Ana Maria" {
+
+	test "Esta economicamente estable" {
+		assert.that(anaMaria.esEstable())
+	}
+	
+	test "Precio del km cuando esta economicamente estable" {
+		assert.equals(30, anaMaria.precio())
+	}
+	
+	test "No esta economicamente estable" {
+		anaMaria.cambiarSituacionEconomica()
+		assert.notThat(anaMaria.esEstable())
+	}
+
+	test "Precio del km cuando No esta economicamente estable" {
+		anaMaria.cambiarSituacionEconomica()
+		assert.equals(25, anaMaria.precio())
+	}
+}
+
+describe "Testing de Teresa" {
+	test "Precio por kilometro sin cambios igual a 22"{
+		assert.equals(22,teresa.precio())
+	}
+	
+	test "Precio por kilometro cin cambios igual a 32"{
+		teresa.precio(32)
+		assert.equals(32,teresa.precio())
+	}
+}
+
+describe "Testing de Roxana" {
+	test "El viaje de Ludmila con 10 km es igual a 180"{
+		assert.equals(180,roxana.precioViaje(ludmila,10))
+	}
+	
+	test "El viaje de teresa con 30 km y con precio 30 es igual a 900"{
+		teresa.precio(30)
+		assert.equals(900,roxana.precioViaje(teresa,30))
+	}
+}
+
+describe "Testing de Gabriela"{
+	test "El viaje de Ludmila con 10 km es igual a 216"{
+		assert.equals(216,gabriela.precioViaje(ludmila,10))
+	}
+	
+	test "El viaje de Ana Maria con 10 km es igual a 300"{
+		anaMaria.cambiarSituacionEconomica()
+		assert.equals(300,gabriela.precioViaje(anaMaria,10))
+	}
+}
+
+describe "Testing de Mariela"{
+	test "El viaje de Ludmila con 1 km es igual a 50"{
+		assert.equals(50,mariela.precioViaje(ludmila,1))
+	}
+	
+	test "El viaje de Ludmila con 15 km es igual a 270"{
+		assert.equals(270,mariela.precioViaje(ludmila,15))
+	}
+}
+
+describe "Testing de Juana"{
+	test "El viaje de Ludmila con 5 km es igual a 100"{
+		assert.equals(100,juana.precioViaje(ludmila,5))
+	}
+	
+	test "El viaje de Ludmila con 15 km es igual a 200"{
+		assert.equals(200,juana.precioViaje(ludmila,15))
+	}
+}
+
+describe "Testing de Lucia"{
+	test "No se puede reemplazar a si misma" {
+		assert.throwsExceptionWithMessage(
+			"Error de Reemplazo",
+			{lucia.reemplazaA(lucia)}
+		)
+	}
+	
+	test "Se puede reemplazar a roxana" {
+		assert.doesNotThrowException(
+			{lucia.reemplazaA(roxana)}
+		)
+	}
+	
+	test "Reemplazo de Roxana" {
+		lucia.reemplazaA(roxana)
+		assert.equals(180,lucia.precioViaje(ludmila,10))
+	}
+}
+
+describe "Testing de Melina"{
+	test "No puede trabajar para si misma" {
+		assert.throwsExceptionWithMessage(
+			"Error de Trabaja Para",
+			{melina.trabajaPara(melina)}
+		)
+	}
+	
+	test "Trabaja para ludmila" {
+		assert.doesNotThrowException(
+			{melina.trabajaPara(ludmila)}
+		)
+	}
+}

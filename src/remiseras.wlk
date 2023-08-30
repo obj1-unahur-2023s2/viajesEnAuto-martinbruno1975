@@ -1,3 +1,5 @@
+import clientes.*
+
 object roxana {
 	method precioViaje(cliente,kms){
 		return cliente.precio() * kms
@@ -12,33 +14,29 @@ object gabriela {
 
 object mariela {
 	method precioViaje(cliente,kms){
-		var total = 50
-		if ((cliente.precio() * kms) > 50){
-			total = cliente.precio() * kms
-		}
-		return total
+		return 50.max(cliente.precio() * kms)
 	}
 }
 
 object juana {
 	method precioViaje(cliente,kms){
-		var total = 100
-		if (kms > 8) {
-			total = 200
-		}
-		return total
+		return if (kms > 8) {200} else {100}
 	}	
 }
 
 object lucia {
-	var reemplaza
+	var reemplazaA
 	
-	method reemplaza() = reemplaza
-	method reemplaza(unaRemisera) {
-		reemplaza = unaRemisera
+	method reemplazaA() = reemplazaA
+	method reemplazaA(unaRemisera){
+		if (self == unaRemisera) {
+			self.error("Error de Reemplazo")
+		} 
+			
+		reemplazaA = unaRemisera
 	}
 	
 	method precioViaje(cliente,kms){
-		return reemplaza.precioViaje(cliente,kms)
+		return reemplazaA.precioViaje(cliente,kms)
 	}	
 }

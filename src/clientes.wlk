@@ -3,26 +3,26 @@ object ludmila {
 }
 
 object anaMaria {
-	var estable = true
+	var esEstable = true
 	
-	method estable() = estable
-	
-	method precio() {
-		var precio = 25
-		if (estable) {
-			precio = 30
-		}
-		return precio
+	method esEstable() = esEstable
+	method cambiarSituacionEconomica() {
+		esEstable = !esEstable
 	}
+	
+	method precio() = if (esEstable) {30} else {25}
 }
 
 object teresa {
-	var precio = 22
+	var property precio = 22
+	
+	/*var precio = 22
 	
 	method precio() = precio
 	method precio(unPrecio){
 		precio = unPrecio
 	}
+	*/
 }
 
 object melina {
@@ -30,6 +30,10 @@ object melina {
 	
 	method trabajaPara() = trabajaPara
 	method trabajaPara(unCliente){
+		if (self == unCliente) {
+			self.error("Error de Trabaja Para")
+		} 
+			
 		trabajaPara = unCliente
 	}
 	
